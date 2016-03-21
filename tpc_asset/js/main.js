@@ -149,14 +149,14 @@ jQuery(function($) {
 	$(window).scroll(function(){
 		if(!$('body').hasClass('static'))
 		{
-		    var $nav = $('nav');
+		    /*var $nav = $('nav');
 		    if ($('body').scrollTop() > 50) {
 		    	$nav.find('.navbar-top').slideUp(100);
 		    	$nav.css('padding-bottom', '2px');
 		    } else {
 		    	$nav.find('.navbar-top').slideDown(100);
 		    	$nav.css('padding-bottom', '40px');
-		    }
+		    }*/
 		}
 
 		

@@ -49,7 +49,7 @@
         </div>
     </div>
 </footer>
-<script src="<?= RES_URL; ?>js/jquery-1.11.1.min.js"></script>
+<script src="<?= RES_URL; ?>js/jquery-2.1.1.min.js"></script>
 <script src="<?= RES_URL; ?>js/smoothWheel.js"></script>
 <script src="<?= RES_URL; ?>js/bootstrap.min.js"></script>
 <script src="<?= RES_URL; ?>js/owl.carousel.js"></script>
@@ -59,3 +59,5 @@
 <script src="<?= RES_URL; ?>js/knobify.js"></script>
 <script src="<?= RES_URL; ?>js/isotope.js"></script>
 <script src="<?= RES_URL; ?>js/main.js"></script>
+<script src="<?= RES_URL; ?>js/sweetalert-dev.js"></script>
+<script src="<?= RES_URL; ?>js/sweetalert.min.js"></script>
