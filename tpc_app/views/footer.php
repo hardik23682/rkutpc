@@ -1,4 +1,4 @@
-<footer style="margin-top: -40px">
+<footer>
     <div class="container">
         <div class="row">
             <div class="col-md-3 col-sm-6 text-left">
@@ -59,5 +59,4 @@
 <script src="<?= RES_URL; ?>js/knobify.js"></script>
 <script src="<?= RES_URL; ?>js/isotope.js"></script>
 <script src="<?= RES_URL; ?>js/main.js"></script>
-<script src="<?= RES_URL; ?>js/sweetalert-dev.js"></script>
 <script src="<?= RES_URL; ?>js/sweetalert.min.js"></script>

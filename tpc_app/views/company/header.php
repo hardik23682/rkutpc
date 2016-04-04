@@ -33,17 +33,20 @@ background-color:#FFFFFF;
 </style>
 </head>
 <body style="background-color:#EEE">
-
-	<div class="col-lg-12" align="center" style="border:none;padding:10px;">
+	<div class="col-lg-12">
+	<div class="col-lg-1"></div>
+	<div class="col-lg-10" align="center" style="border:none;padding:10px;background-color:#FFFFFF">
 			<img src="<?php echo base_url(); ?>/tpc_asset/img/logo.png" class=
 							"img-responsive">
 	</div>
+	<div class="col-lg-1"></div>
+	</div>
+	<div class="col-lg-12">
+	<div class="col-lg-1"></div>
+	<div class="col-lg-10" style="border-radius:5px;background-color:#FFFFFF;padding-top:10px;padding:0px">
 	
-	<div class="col-lg-2">&nbsp;</div>
-	<div class="col-lg-8" style="border-radius:5px;background-color:#FFFFFF;padding-top:10px;">
-	
-		<nav class="navbar navbar-default" style="background-color:#FFFFFF;border:none">
-  			<div class="container-fluid" style="background-color:rgba(255, 66, 66, 0.85); ">
+		<nav class="navbar navbar-default" style="background-color:#FFFFFF;border:none;">
+  			<div class="container-fluid" style="background-color:#EEE;padding:0">
     <!-- Brand and toggle get grouped for better mobile display -->
     			<div class="navbar-header">
      				 <button type="button" class="navbar-toggle collapsed" data-toggle=	 							"collapse" data-target="#bs-example-navbar-collapse-1" 
@@ -77,7 +80,7 @@ background-color:#FFFFFF;
 		        </li>
 				
 				<li class="ar" style="text-align:center;">
-				<a href="exam.php" style="color:blue;font-family:Calibri">Syllabus</a>
+				<a href="exam.php" style="color:blue;font-family:Calibri;font-size:18px;">Syllabus</a>
 				</li>
       </ul>
     </div><!-- /.navbar-collapse -->

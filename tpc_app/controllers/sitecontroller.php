@@ -13,8 +13,8 @@ class SiteController extends CI_Controller
 
     public function index()
     {
-        $submit=$this->input->post('submit');
-        if(isset($submit))
+        $submit = $this->input->post('submit');
+        if (isset($submit))
         {
             $config = array(
                 array(
@@ -65,66 +65,144 @@ class SiteController extends CI_Controller
                 } else {
                     $error = "Invalid Credential";
                 }
-            }
-            else
-            {
+            } else {
                 $error = validation_errors();
             }
-            $data['error']=$error;
-            $this->load->template('vhome',$data);
-        }
-        else
+            $data['error'] = $error;
+            $this->load->template('vhome', $data);
+        } else
             $this->load->template('vhome');
     }
 
-	public function creg()
+    public function showstudform()
+    {
+        $this->load->template('studreg');
+    }
+
+    public function showcomform()
+    {
+        $this->load->template('comreg');
+    }
+
+    public function showintform()
+    {
+        $this->load->template('intreg');
+    }
+
+    public function creg()
     {
         //this will get data from form
         //start here
-
-        $name = null;
-        $email = null;
-        $pass = null;
-        $city = null;
-        $submit = null;
-
-        extract($_POST);
-        $params['name'] = $name;
-        $params['email'] = $email;
-        $params['pass'] = $pass;
-        $params['city'] = $city;
-
-
-        $submit=$this->input->post('csubmit');
+        $submit = $this->input->post('submit');
         if (isset($submit)) {
-            $s = $this->sitemodel->cregister($params);
-        }
-        //end here
+            $config = array(
+                array(
+                    'field' => 'name',
+                    'label' => 'Name',
+                    'rules' => 'required',
+                    'errors' => array(
+                        'required' => 'You must provide a %s'
+                    )
+                ),
+                array(
+                    'field' => 'email',
+                    'label' => 'Email Id',
+                    'rules' => 'required|valid_email',
+                    'errors' => array(
+                        'required' => 'You must provide a %s',
+                        'valid_email' => '%s is not valid'
+                    )
+                ),
+                array(
+                    'field' => 'pass',
+                    'label' => 'Password',
+                    'rules' => 'required',
+                    'errors' => array(
+                        'required' => 'You must provide a %s'
+                    )
+                ),
+                array(
+                    'field' => 'cpass',
+                    'label' => 'Confirm Passowrd',
+                    'rules' => 'required|matches[pass]',
+                    'errors' => array(
+                        'required' => 'You must provide a %s',
+                        'matches' => 'Password & %s is not match'
+                    )
+                ),
+                array(
+                    'field' => 'city',
+                    'label' => 'City',
+                    'rules' => 'required',
+                    'errors' => array(
+                        'required' => 'You must provide a %s'
+                    )
+                ),
+                array(
+                    'field' => 'tc',
+                    'label' => 'Terms & Conditions',
+                    'rules' => 'required',
+                    'errors' => array(
+                        'required' => 'You must agree with %s'
+                    )
+                ),
+            );
 
-        //here check that data is inserted or not and redirect according
-        //insert method will return 0 or 1
-        if (isset($s))
-        {
-            if ($s == 1)
+            $this->form_validation->set_rules($config);
+
+            if ($this->form_validation->run() == true)
             {
-                echo "<script>
-                    alert('Data Save');
-                    window.location.href='../';
-                    </script>";
-            }
-            else
-                echo "<script>alert('Data not Save');</script>";
-        }
+                $name = null;
+                $email = null;
+                $pass = null;
+                $city = null;
+                $submit = null;
 
+                extract($_POST);
+                $params['name'] = $name;
+                $params['email'] = $email;
+                $params['pass'] = $pass;
+                $params['city'] = $city;
+
+
+                if (isset($submit)) {
+                    $s = $this->sitemodel->cregister($params);
+                }
+                //end here
+
+                //here check that data is inserted or not and redirect according
+                //insert method will return 0 or 1
+                if (isset($s)) {
+                    if ($s == 1) {
+                        /*echo '<script src=' . base_url() . 'tpc_asset/js/sweetalert.min.js></script>';
+                        echo '<link href=' . base_url() . 'tpc_asset/css/sweetalert.css>';
+                        echo '<script type="text/javascript">';
+                        echo 'setTimeout(function () { swal("Message From Admin!","You Are register wait for approval!");';
+                        echo '}, 1000);';*/
+                        echo "<script>alert('Data Save');";
+                        echo "window.location.href='../'; </script>";
+                    } else
+                        echo "<script>alert('Data not Save');</script>";
+                }
+            } else {
+                $error = validation_errors();
+            }
+            $data['error'] = $error;
+            $this->load->template('comreg', $data);
+        } else {
+            $this->load->template('comreg');
+        }
     }
+
+
 
     public function sreg()
     {
-        echo "<script>alert('jr');</script>";
         //this will get data from form
         //start here
         $submit = $this->input->post('ssubmit');
-        if (isset($submit)) {
+        if (isset($submit))
+        {
             $config = array(
                 array(
                     'field' => 'fname',
@@ -186,7 +264,7 @@ class SiteController extends CI_Controller
                 $lname = null;
                 $email = null;
                 $pass = null;
-                $gen = null;
+                $gender = null;
                 $city = null;
                 $submit = null;
 
@@ -195,10 +273,10 @@ class SiteController extends CI_Controller
                 $params['lname'] = $lname;
                 $params['email'] = $email;
                 $params['pass'] = $pass;
-                $params['gender'] = $gen;
+                $params['gender'] = $this->input->post('gender');
                 $params['city'] = $city;
 
-                $submit=$this->input->post('ssubmit');
+                $submit = $this->input->post('ssubmit');
                 if (isset($submit)) {
                     $s = $this->sitemodel->sregister($params);
                 }
@@ -208,24 +286,27 @@ class SiteController extends CI_Controller
                 //insert method will return 0 or 1
                 if (isset($s)) {
                     if ($s == 1) {
-                       echo "<script>
-                                alert('Data Save');
-                                window.location.href='../';
-                            </script>";
+                        /*echo '<script src=' . base_url() . 'tpc_asset/js/sweetalert.min.js></script>';
+                        echo '<link href=' . base_url() . 'tpc_asset/css/sweetalert.css>';
+                        echo '<script type="text/javascript">';
+                        echo 'setTimeout(function () { swal("Message From Admin!","You Are registered wait for approval!");';
+                        echo '}, 1000);';*/
+                        echo "<script>alert('Data Save');";
+                        echo "window.location.href='../'; </script>";
                     } else
                         echo "<script>alert('Data not Save');</script>";
                 }
             }
             else
             {
-                echo "<script>alert('hello');</script>";
                 $error = validation_errors();
             }
             $data['error'] = $error;
-            print_r($data);
-            //$this->load->template('vhome/#smodal', $data);
-        } else {
-            //$this->load->template('vhome/#smodal');
+            $this->load->template('studreg', $data);
+        }
+        else
+        {
+            $this->load->template('studreg');
         }
     }
 
@@ -233,40 +314,100 @@ class SiteController extends CI_Controller
     {
         //this will get data from form
         //start here
-        $name=null;
-        $email=null;
-        $pass=null;
-        $city=null;
-        $itype=null;
+        $submit = $this->input->post('isubmit');
+        if (isset($submit)) {
+            $config = array(
+                array(
+                    'field' => 'name',
+                    'label' => 'Name',
+                    'rules' => 'required',
+                    'errors' => array(
+                        'required' => 'You must provide a %s'
+                    )
+                ),
+                array(
+                    'field' => 'email',
+                    'label' => 'Email Id',
+                    'rules' => 'required|valid_email',
+                    'errors' => array(
+                        'required' => 'You must provide a %s',
+                        'valid_email' => '%s is not valid'
+                    )
+                ),
+                array(
+                    'field' => 'pass',
+                    'label' => 'Password',
+                    'rules' => 'required',
+                    'errors' => array(
+                        'required' => 'You must provide a %s'
+                    )
+                ),
+                array(
+                    'field' => 'cpass',
+                    'label' => 'Confirm Passowrd',
+                    'rules' => 'required|matches[pass]',
+                    'errors' => array(
+                        'required' => 'You must provide a %s',
+                        'matches' => 'Password & %s is not match'
+                    )
+                ),
+                array(
+                    'field' => 'city',
+                    'label' => 'City',
+                    'rules' => 'required',
+                    'errors' => array(
+                        'required' => 'You must provide a %s'
+                    )
+                ),
+            );
 
-        extract($_POST);
-        $params['name']=$name;
-        $params['email']=$email;
-        $params['pass']=$pass;
-        $params['city']=$city;
-        $params['itype']=$itype;
+            $this->form_validation->set_rules($config);
 
-        $submit=$this->input->post('isubmit');
-        if(isset($submit))
-        {
-            $s=$this->sitemodel->iregister($params);
-        }
-        //end here
+            if ($this->form_validation->run() == true) {
 
-        //here check that data is inserted or not and redirect according
-        //insert method will return 0 or 1
-        if(isset($s))
-        {
-            if ($s == 1)
+                $name = null;
+                $email = null;
+                $pass = null;
+                $city = null;
+                $itype = null;
+
+                extract($_POST);
+                $params['name'] = $name;
+                $params['email'] = $email;
+                $params['pass'] = $pass;
+                $params['city'] = $city;
+                $params['itype'] = $itype;
+
+                if (isset($submit)) {
+                    $s = $this->sitemodel->iregister($params);
+                }
+                //end here
+
+                //here check that data is inserted or not and redirect according
+                //insert method will return 0 or 1
+                if (isset($s)) {
+                    if ($s == 1) {
+                        ?>
+                        <script src="<?= RES_URL; ?>js/sweetalert.min.js"></script>
+                        <link href="<?= RES_URL; ?>css/sweetalert.css">
+                        <?php
+                        echo '<script type="text/javascript">';
+                        echo 'setTimeout(function () { swal("WOW!","Message!","success");';
+                        echo '}, 1000);';
+                        echo "window.location.href='../'; </script>";
+
+                    } else
+                        echo "<script>alert('Data not Save');</script>";
+                }
+
+            } else
             {
-                echo "  <script>
-                            alert('Data Save');
-                            window.location.href='../';
-                        </script>";
-
+                $error = validation_errors();
             }
-            else
-                echo "<script>alert('Data not Save');</script>";
+            $data['error'] = $error;
+            $this->load->template('intreg', $data);
+        } else {
+            $this->load->template('intreg');
         }
     }
 }

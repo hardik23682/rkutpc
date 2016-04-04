@@ -10,14 +10,7 @@
     <link href="<?= RES_URL; ?>css/animate.css" rel="stylesheet" type="text/css">
     <link rel="icon"
           type="image/png"
-          href="<?= RES_URL; ?>/img/rkulogo.png" />
-    <script>
-        $(document).click(function(e) {
-            if (!$(e.target).is('a')) {
-                $('.collapse').collapse('hide');
-            }
-        });
-    </script>
+          href="<?= RES_URL; ?>img/rkulogo.png" />
 </head>
 
 <nav class="navbar navbar-default navbar-fixed-top" style="padding-bottom: 0px">
@@ -62,9 +55,9 @@
                     <li class="dropdown active">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="letter-spacing:2px">Register As<span class="caret"></span></a>
                         <ul class="dropdown-menu animated pulse" role="menu" style="background-color:rgba(255, 66, 66, 0.85);">
-                            <li><a href="#smodal" data-toggle="modal" style="color:white;letter-spacing:1.5px">Student</a></li>
-                            <li><a href="#cmodal" data-toggle="modal" style="color:white;letter-spacing:1.5px">Company</a></li>
-                            <li><a href="#imodal" data-toggle="modal" style="color:white;letter-spacing:1.5px">Institute</a></li>
+                            <li><a href="<?php echo site_url('sitecontroller/showstudform');?>" data-toggle="modal" style="color:white;letter-spacing:1.5px">Student</a></li>
+                            <li><a href="<?php echo site_url('sitecontroller/showcomform');?>" data-toggle="modal" style="color:white;letter-spacing:1.5px">Company</a></li>
+                            <li><a href="<?php echo site_url('sitecontroller/showintform');?>" data-toggle="modal" style="color:white;letter-spacing:1.5px">Institute</a></li>
                         </ul>
                     </li>
                 </ul>

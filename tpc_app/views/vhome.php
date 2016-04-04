@@ -1,15 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<script>
-		<?php if(!empty($msg))
-		{
-		echo "$(document).ready(function()
-		{
-			sweetAlert('','You Are Register And Request Sent to the admin wait for approval');
-		});";
-		}?>
-	</script>
 </head>
 <body>
 <!-- all forms div with linking to page -->
@@ -226,7 +217,7 @@
 <header style="margin-top:-40px;">
 <form class="col-md-3 col-md-offset-3 col-sm-6 col-xs-12 job-form" method="post">
 		<?php if(!empty($error)) { ?>
-			<div class="alert fade in" style="background-color: white;"><?=$error;?></div>
+			<div class="alert fade in" style="background-color:darkred;"><?=$error;?></div>
 		<?php } ?>
 		<?php echo form_open('sitecontroller', array(
 			'id' => 'frmlogin',
@@ -240,11 +231,11 @@
 			<div>
 			<h3 class="text-left">Register As <i class="fa fa-chevron-right"></i><hr style="width:100%"></h3>
 	        <div class="btn dark-red" style="padding:5px">
-			<a href="#smodal" data-toggle="modal" style="color:white;letter-spacing:1.5px">Student</a></div>
+				<a href="<?php echo site_url('sitecontroller/showstudform');?>" style="color:white;letter-spacing:1.5px">Student</a></div>
 			<div class="btn dark-red" style="padding:5px">
-				<a href="#cmodal" data-toggle="modal" style="color:white;letter-spacing:1.5px">Company</a></div>
+				<a href="<?php echo site_url('sitecontroller/showcomform');?>" style="color:white;letter-spacing:1.5px">Company</a></div>
 			<div class="btn dark-red" style="padding:5px">
-				<a href="#imodal" data-toggle="modal" style="color:white;letter-spacing:1.5px">Institute</a></div>
+				<a href="<?php echo site_url('sitecontroller/showintform');?>" style="color:white;letter-spacing:1.5px">Institute</a></div>
 			</div>
 	<?php form_close();?>
 	</form>
@@ -380,13 +371,13 @@
 	</div>
 </section>
 
-<section class="section-alt2 red">
+<section class="section-alt2 red" style="margin-bottom:0px;">
 	<div class="row title text-center">
 		<h3 style="color: white">Job Statistics</h3>
 		<h6 class="alt" style="color: white">Here are the most popular categories</h6>
 	</div>
 	<div class="container">
-		<div class="row" style="padding: 10px">
+		<div class="row">
 			<div class="col-md-3 text-center" style="background-color: white;color: red;padding: 10px;border-radius:10px;margin: 40px">
 				<input class="dial" value="71" data-readonly="true" data-bgColor="transparent" data-fgColor="#22c0e8" data-width="150" data-linecap="round" data-inputcolor="red" style="color:red" data-thickness=".25">
 				<h4 style="color:red">School Of Engineering</h4>

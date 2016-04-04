@@ -405,7 +405,7 @@ a.dropdown-input i { font-size:12px; float:right; margin-top:4px;}
     width: 100%;
     padding: 15px 20px;
     font-size: 14px;
-    color: #001C49;
+    color:black;
     background-color: #dcdfe3;
     border:0;
     border-radius:5px;
@@ -501,12 +501,12 @@ section.facts .fact {
 	height:40px;
 }
 section.section-alt {
-	background: url('../img/section-alt.jpg');
+	background: url('');
 	background-size:cover;
 }
 section.section-alt1 {
 	padding:100px 0 !important;
-	background:url(../RKU/IMG_09931-Large.jpg);
+	background:url('');
 	background-size:cover;
 }
 section.section-alt2 {
@@ -722,14 +722,14 @@ a.sup {
     clear:none;
 }
 
-.checks label{background-image:url(../../../../www.csscheckbox.com/checkboxes/lite-cyan-check.png);}
+.checks label{background-image:url('');}
 
 .checks label[for="fader"] {
 	background:none;
 }
 
 .distance {
-	color:##001C49;
+	color:#001C49;
 }
 
 input[type=checkbox].css-checkbox {
@@ -796,6 +796,7 @@ label {
 	font-size:14px;
 	font-weight:500;
 	margin:0 10px;
+	color: white;
 }
 
 .author {
