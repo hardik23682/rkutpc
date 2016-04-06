@@ -2,31 +2,33 @@
     <div class="col-lg-2"></div>
     <div class="col-lg-8" style="padding:25px;">
         <?php if(!empty($error)) { ?>
-        <div class="alert fade in" style="background-color: white;"><?=$error;?></div>
-    <?php } ?>
+            <div class="alert fade in alert-danger"><?=$error;?></div>
+        <?php } ?>
+        <?php if(!empty($success)) { ?>
+            <div class="alert fade in green" style="color: white;"><b><?=$success;?></b></div>
+        <?php }
+        else
+            $reset=false;
+        ?>
     <form class="form-horizontal col-lg-12" style="background-color:transparent;" role="form" method="post" action="../sitecontroller/sreg">
-        <?php echo form_open('sitecontroller/sreg', array(
-            'id' => 'frmcreg',
-            'role' => 'form'
-        ));?>
     <fieldset>
         <legend style="color:white;">Student Register</legend>
         <div class="form-group">
             <label for="firstname" class="col-sm-3 control-label">First Name</label>
             <div class="col-sm-7">
-                <input type="text" name="fname" class="form-control" value="<?=set_value('fname')?>" id="firstname" placeholder="Enter First Name" autofocus>
+                <input type="text" name="fname" class="form-control" value="<?php echo ($reset) ? "" : set_value('fname'); ?>" id="firstname" placeholder="Enter First Name" autofocus>
             </div>
         </div>
         <div class="form-group">
             <label for="lastname" class="col-sm-3 control-label">Last Name</label>
             <div class="col-sm-7">
-                <input type="text" name="lname" class="form-control" value="<?=set_value('lname')?>" id="lastname" placeholder="Enter Last Name">
+                <input type="text" name="lname" class="form-control" value="<?php echo ($reset) ? "" : set_value('lname'); ?>"" id="lastname" placeholder="Enter Last Name">
             </div>
         </div>
         <div class="form-group">
             <label for="email" class="col-sm-3 control-label">Email</label>
             <div class="col-sm-7">
-                <input type="text" name="email" class="form-control" value="<?=set_value('email')?>" id="email" placeholder="Enter Email">
+                <input type="text" name="email" class="form-control" value="<?php echo ($reset) ? "" : set_value('email'); ?>"" id="email" placeholder="Enter Email">
             </div>
         </div>
         <div class="form-group">
@@ -53,14 +55,14 @@
         <div class="form-group">
             <label for="email" class="col-sm-3 control-label">City</label>
             <div class="col-sm-7">
-                <input type="text" name="city" class="form-control" id="city" value="<?=set_value('city')?>" placeholder="Enter City Name">
+                <input type="text" name="city" class="form-control" id="city" value="<?php echo ($reset) ? "" : set_value('city'); ?>"" placeholder="Enter City Name">
             </div>
         </div>
         <div class="form-group">
             <div class="col-sm-offset-3 col-sm-7">
                 <div class="checkbox">
                     <label>
-                        <input type="checkbox" checked="checked"> Agree with term and conditions
+                        <input type="checkbox" name="tc" checked="checked"> Agree with term and conditions
                     </label>
                 </div>
             </div>
@@ -71,10 +73,8 @@
             </div>
         </div>
     </fieldset>
-    <?php form_close();?>
 </form>
 </div>
-<div class="col-lg-2">&nbsp;</div>
-</div>
+    </div>
 <div class="row">
 </div>

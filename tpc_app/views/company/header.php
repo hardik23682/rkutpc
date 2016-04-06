@@ -14,9 +14,6 @@
       type="image/png" 
       href="<?php echo base_url(); ?>/tpc_asset/img/rkulogo.png" />
 <style>
-a
-{
-}
 .ar
 {
 text-align:center;

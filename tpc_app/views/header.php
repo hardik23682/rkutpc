@@ -18,9 +18,9 @@
         <div class="col-lg-4">
             <script>
                 if(screen.width<1200)
-                    document.write("<img src='<?= RES_URL; ?>img/logo.png' width='40%'>");
+                    document.write("<a href='../sitecontroller'><img src='<?= RES_URL; ?>img/logo.png' width='40%'></a>");
                 else
-                    document.write("<img src='<?= RES_URL; ?>img/logo.png' width='100%'>");
+                    document.write("<a href='../sitecontroller'><img src='<?= RES_URL; ?>img/logo.png' width='100%'></a>");
             </script>
         </div>
         <div class="col-lg-8">
@@ -39,7 +39,7 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" style="padding-bottom:10px;background-color:#F8F8F8">
                 <ul class="nav navbar-nav navbar-right" style="align-content: center">
                     <li class="active">
-                        <a href="#" style="letter-spacing:2px">Home</a></li>
+                        <a href="../sitecontroller" style="letter-spacing:2px">Home</a></li>
                     <li class="active">
                         <a href="#" style="letter-spacing:2px">Job</a>
                     </li>

@@ -1,29 +1,29 @@
 <div class="col-lg-12 red" style="margin-top: -20px;margin-bottom: -40px;">
     <div class="col-lg-2"></div>
     <div class="col-lg-8" style="padding:25px;">
-        <?php if(!empty($error)) { ?>
-    <?php } ?>
     <form class="form-horizontal col-lg-12" style="background-color:transparent;" role="form" method="post" action="../sitecontroller/creg">
         <?php if(!empty($error)) { ?>
-            <div class="alert fade in" style="background-color:white;"><?=$error;?></div>
+            <div class="alert fade in alert-danger"><?=$error;?></div>
         <?php } ?>
+        <?php if(!empty($success)) { ?>
+            <div class="alert fade in green" style="color: white;"><b><?=$success;?></b></div>
+        <?php }
+        else
+            $reset=false;
+        ?>
 
-        <?php echo form_open('sitecontroller/creg', array(
-            'id' => 'frmcreg',
-            'role' => 'form'
-        ));?>
             <fieldset>
                 <legend style="color:white;">Company Register</legend>
                 <div class="form-group">
                     <label for="name" class="col-sm-3 control-label">Company Name</label>
                     <div class="col-sm-7">
-                        <input type="text" name="name" class="form-control" id="name" value="<?=set_value('name')?>" placeholder="Enter Company Name" autofocus>
+                        <input type="text" name="name" class="form-control" id="name" value="<?php echo ($reset) ? "" : set_value('name'); ?>" placeholder="Enter Company Name" autofocus>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="email" class="col-sm-3 control-label">Email</label>
                     <div class="col-sm-7">
-                        <input type="text" name="email" class="form-control" id="email" value="<?=set_value('email')?>" placeholder="Enter Email">
+                        <input type="text" name="email" class="form-control" id="email" value="<?php echo ($reset) ? "" : set_value('email'); ?>" placeholder="Enter Email">
                     </div>
                 </div>
                 <div class="form-group">
@@ -41,7 +41,7 @@
                 <div class="form-group">
                     <label for="email" class="col-sm-3 control-label">City</label>
                     <div class="col-sm-7">
-                        <input type="text" name="city" class="form-control" id="city" value="<?=set_value('city')?>" placeholder="Enter City Name">
+                        <input type="text" name="city" class="form-control" id="city" value="<?php echo ($reset) ? "" : set_value('city'); ?>" placeholder="Enter City Name">
                     </div>
                 </div>
                 <div class="form-group">

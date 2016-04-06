@@ -1,17 +1,16 @@
 <div class="col-lg-12 red" style="margin-top: -20px;margin-bottom: -40px;">
     <div class="col-lg-2"></div>
     <div class="col-lg-8" style="padding:25px;">
-        <?php if(!empty($error)) { ?>
-        <?php } ?>
         <form class="form-horizontal col-lg-12" style="background-color:transparent;" role="form" method="post" action="../sitecontroller/ireg">
             <?php if(!empty($error)) { ?>
-                <div class="alert fade in" style="background-color:white;"><?=$error;?></div>
+                <div class="alert fade in alert-danger"><?=$error;?></div>
             <?php } ?>
-
-<?php echo form_open('sitecontroller/ireg', array(
-    'id' => 'frmcreg',
-    'role' => 'form'
-));?>
+            <?php if(!empty($success)) { ?>
+                <div class="alert fade in green" style="color: white;"><b><?=$success;?></b></div>
+            <?php }
+            else
+                $reset=false;
+            ?>
             <fieldset>
                 <legend style="color:white;">Institute Register</legend>
                 <div class="form-group">
@@ -58,7 +57,7 @@
                     <div class="col-sm-offset-3 col-sm-7">
                         <div class="checkbox">
                             <label>
-                                <input type="checkbox" checked="checked"> Agree with term and conditions
+                                <input type="checkbox" name="tc" checked="checked"> Agree with term and conditions
                             </label>
                         </div>
                     </div>
