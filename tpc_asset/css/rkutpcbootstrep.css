@@ -1,9 +1,35 @@
 /* Large desktops and laptops */
 @media (min-width: 1200px) 
 {
-.ar
+.ar 
 {
 width:33%;
+}
+.ars
+{
+width:25%;
+}
+.mchat
+{
+	height:160px;
+    background-image:url(../img/chat.png);
+	background-size:100%;
+	background-repeat:no-repeat;
+}
+.mhelp
+{
+	 height:250px;
+     background-image:url(../img/help.png);
+	 background-size:100%;
+	 background-repeat:no-repeat;
+}
+.btncurr
+{
+border-bottom-left-radius:5px;border-top-left-radius:5px;
+}
+.btnlink
+{
+border-bottom-right-radius:5px;border-top-right-radius:5px;
 }
 }
 /* Landscape tablets and medium desktops */
@@ -56,6 +82,10 @@ width:33%;
 {
 width:100%;
 }
+.ars
+{
+width:100%;
+}
 .navbar-header {
         float: none;
     }
@@ -99,5 +129,24 @@ width:100%;
 {
 width:100%;
 margin:5%;
+}
+.ars
+{
+width:100%;
+margin:5%;
+}
+.mhelp
+{
+     background-image:url(../img/mhelp.png);
+	 background-size:100%;
+	 background-repeat:no-repeat;
+	 height:100px;
+}
+.mchat
+{
+	height:160px;
+    background-image:url(../img/mchat.png);
+	background-size:100%;
+	background-repeat:no-repeat;
 }
 }
