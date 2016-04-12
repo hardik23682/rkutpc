@@ -95,12 +95,12 @@ $(document).ready(function(){
 						<h5>TCS - Gandinagar</h5>
 					</div>
 						<div class="col-lg-12" style="padding-top:5px;letter-spacing: 2px;">
-							<a href="profile">Edit Profile</a></h5>&nbsp;|&nbsp;
+							<a href="<?php echo base_url(); ?>ccompany/editprofile">Edit Profile</a></h5>&nbsp;|&nbsp;
 							<a href="#" style="letter-spacing:1px">Logout</a>
 						</div><br>&nbsp;
 
 				</div>
-		<div class="col-lg-12 mchat" style="padding:0px;padding-top:20px" onclick="window.location='http://www.facebook.com';">ccc</div>
+		<div class="col-lg-12 mchat" style="padding:0px;padding-top:20px" onclick="window.location='http://www.facebook.com';"></div>
 		<div class="col-lg-12 mhelp" style="padding:0px;" onclick="window.location='http://www.facebook.com';">
 			
 		</div>
@@ -109,8 +109,8 @@ $(document).ready(function(){
 
 	<div class="col-lg-9">
 	<div class="col-lg-6 btncurr" style="cursor:pointer;background-color: #337AB7;padding:15px;font-size:20px;letter-spacing:1px;font-weight:lighter;font-family:Calibri;color:#FFFFFF">Current Job Statistics</div>
-		<div class="col-lg-6 btn-primary btnlink" style="text-align: right;cursor:pointer;background-color: #337AB7;padding:15px;font-size:20px;letter-spacing:1px;font-weight:lighter;font-family:Calibri;color:#FFFFFF">
-			<a href="#" style="color: white">Edit</a>&nbsp;|&nbsp;<a href="#" style="color: white;">+ Post New Drive</a></div>
+		<div class="col-lg-6  btnlink" style="text-align: right;cursor:pointer;background-color: #337AB7;padding:15px;font-size:20px;letter-spacing:1px;font-weight:lighter;font-family:Calibri;color:#FFFFFF">
+			<a href="#" style="color: white">Edit</a>&nbsp;|&nbsp;<a href="<?php echo base_url(); ?>ccompany/addDrive" style="color: white;">+ Post New Drive</a></div>
 	<div class="curr">
 		<div class="col-lg-8">
 			<h3 style="font-family:Calibri;letter-spacing:1px ">Title : TCS Campus Drive.</h3>
@@ -155,5 +155,5 @@ In this  drive  3 Rounds As Below
       </div>
 	  </div>
       </div>
-	  <div class="col-lg-12">&nbsp;</div>
+	  <div class="col-lg-12" style="height:20px">&nbsp;</div>
     </body> 
