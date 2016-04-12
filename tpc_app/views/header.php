@@ -18,7 +18,7 @@
         <div class="col-lg-4">
             <script>
                 if(screen.width<1200)
-                    document.write("<a href='../sitecontroller'><img src='<?= RES_URL; ?>img/logo.png' width='40%'></a>");
+                    document.write("<a href='../sitecontroller'><img src='<?= RES_URL; ?>img/logo.png' width='50%'></a>");
                 else
                     document.write("<a href='../sitecontroller'><img src='<?= RES_URL; ?>img/logo.png' width='100%'></a>");
             </script>

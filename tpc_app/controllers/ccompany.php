@@ -5,7 +5,7 @@ class ccompany extends CI_Controller
     public function index()
     {
 		$this->load->view('company/header');
-		$this->load->view('company/dashboard');
+		$this->load->view('company/vcdetailform');
 		$this->load->view('company/footer');
    	} 
 	public function addDrive()

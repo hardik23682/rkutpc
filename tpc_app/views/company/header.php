@@ -7,13 +7,15 @@
 <link href="<?php echo base_url(); ?>/tpc_asset/assents/css/bootstrap-theme.css" rel="stylesheet"/>
 <link href="<?php echo base_url(); ?>/tpc_asset/assents/css/2.css" rel="stylesheet">
 <link href="<?php echo base_url(); ?>/tpc_asset/css/rkutpcbootstrep.css" rel="stylesheet">
-<script src="<?php echo base_url(); ?>/tpc_asset/js/jquery.js"></script>
-<script src="<?php echo base_url(); ?>/tpc_asset/js/bootstrap.min.js"></script>
-<script src="<?php echo base_url(); ?>/tpc_asset/css/vTicker.js"></script>
-<link rel="icon" 
+	<link href="<?php echo base_url(); ?>/tpc_asset/css/bootstrap-datepicker3.css" rel="stylesheet">
+	<link href="<?php echo base_url(); ?>/tpc_asset/css/bootstrap-datepicker3.min.css" rel="stylesheet">
+	<link href="<?php echo base_url(); ?>/tpc_asset/css/bootstrap-fileupload.min.css" rel="stylesheet">
+	<link href="<?php echo base_url(); ?>/tpc_asset/css/bootstrap-theme.css" rel="stylesheet">
+
+<link rel="icon"
       type="image/png" 
       href="<?php echo base_url(); ?>/tpc_asset/img/rkulogo.png" />
-<style>
+	<style>
 .ar
 {
 text-align:center;
@@ -30,6 +32,12 @@ background-color:#FFFFFF;
 </style>
 </head>
 <body style="background-color:#EEE">
+<script src="<?php echo base_url(); ?>/tpc_asset/js/jquery.js"></script>
+<script src="<?php echo base_url(); ?>/tpc_asset/js/bootstrap.min.js"></script>
+<script src="<?php echo base_url(); ?>/tpc_asset/js/vTicker.js"></script>
+<script src="<?php echo base_url(); ?>/tpc_asset/js/moment-with-locales.js"></script>
+<script src="<?php echo base_url(); ?>/tpc_asset/js/bootstrap-datepicker.js"></script>
+
 	<div class="col-lg-12">
 	<div class="col-lg-1"></div>
 	<div class="col-lg-10" align="center" style="border:none;padding:10px;background-color:#FFFFFF">

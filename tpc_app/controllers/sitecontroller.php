@@ -99,9 +99,10 @@ class SiteController extends CI_Controller
                 array(
                     'field' => 'name',
                     'label' => 'Name',
-                    'rules' => 'required',
+                    'rules' => 'required|alpha',
                     'errors' => array(
-                        'required' => 'You must provide a %s'
+                        'required' => 'You must provide a %s',
+                        'alpha'=>'Must enter characters only in %s'
                     )
                 ),
                 array(
@@ -125,18 +126,18 @@ class SiteController extends CI_Controller
                     array(
                         'field' => 'cpass',
                         'label' => 'Confirm Passowrd',
-                        'rules' => 'required|matches[pass]',
+                        'rules' => 'matches[pass]',
                         'errors' => array(
-                            'required' => 'You must provide a %s',
                             'matches' => 'Password & %s is not match'
                         )
                     ),
                     array(
                         'field' => 'city',
                         'label' => 'City',
-                        'rules' => 'required',
+                        'rules' => 'required|alpha',
                         'errors' => array(
-                            'required' => 'You must provide a %s'
+                            'required' => 'You must provide a %s',
+                            'alpha'=>'Must enter characters only in %s'
                         )
                     ),
                     array(
@@ -208,17 +209,19 @@ class SiteController extends CI_Controller
                 array(
                     'field' => 'fname',
                     'label' => 'First Name',
-                    'rules' => 'required',
+                    'rules' => 'required|alpha',
                     'errors' => array(
-                        'required' => 'You must provide a %s'
+                        'required' => 'You must provide a %s',
+                        'alpha'=>'Must enter characters only in %s'
                     )
                 ),
                 array(
                     'field' => 'lname',
                     'label' => 'Last Name',
-                    'rules' => 'required',
+                    'rules' => 'required|alpha',
                     'errors' => array(
-                        'required' => 'You must provide a %s'
+                        'required' => 'You must provide a %s',
+                        'alpha'=>'Must enter characters only in %s'
                     )
                 ),
                 array(
@@ -242,18 +245,18 @@ class SiteController extends CI_Controller
                 array(
                     'field' => 'cpass',
                     'label' => 'Confirm Passowrd',
-                    'rules' => 'required|matches[pass]',
+                    'rules' => 'matches[pass]',
                     'errors' => array(
-                        'required' => 'You must provide a %s',
                         'matches' => 'Password & %s is not match'
                     )
                 ),
                 array(
                     'field' => 'city',
                     'label' => 'City',
-                    'rules' => 'required',
+                    'rules' => 'required|alpha',
                     'errors' => array(
-                        'required' => 'You must provide a %s'
+                        'required' => 'You must provide a %s',
+                        'alpha'=>'Must enter characters only in %s'
                     )
                 ),
                 array(
@@ -330,9 +333,10 @@ class SiteController extends CI_Controller
                 array(
                     'field' => 'name',
                     'label' => 'Name',
-                    'rules' => 'required',
+                    'rules' => 'required|alpha',
                     'errors' => array(
-                        'required' => 'You must provide a %s'
+                        'required' => 'You must provide a %s',
+                        'alpha'=>'Must enter characters only in %s'
                     )
                 ),
                 array(
@@ -356,18 +360,18 @@ class SiteController extends CI_Controller
                 array(
                     'field' => 'cpass',
                     'label' => 'Confirm Passowrd',
-                    'rules' => 'required|matches[pass]',
+                    'rules' => 'matches[pass]',
                     'errors' => array(
-                        'required' => 'You must provide a %s',
                         'matches' => 'Password & %s is not match'
                     )
                 ),
                 array(
                     'field' => 'city',
                     'label' => 'City',
-                    'rules' => 'required',
+                    'rules' => 'required|alpha',
                     'errors' => array(
-                        'required' => 'You must provide a %s'
+                        'required' => 'You must provide a %s',
+                        'alpha'=>'Must enter characters only in %s'
                     )
                 ),
                 array(
