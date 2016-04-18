@@ -28,7 +28,7 @@ background-color:#FFFFFF;
 }
 </style>
 </head>
-<body style="background-color:#EEE">
+<body style="background-image:url('<?php echo base_url();?>tpc_asset/rku/body-bg.png');background-repeat:repeat-x;background-color:#DCE9F7">
 <div id="jobdetails" class="modal fade">
 	<div class="modal-dialog" style="height:100%;">
 		<div class="modal-content" style="height:80%;width:100%">
@@ -72,10 +72,10 @@ background-color:#FFFFFF;
 		<a href="result" style="color:#003399;font-family:Calibri;font-size:21px;">Result</a>
 		</li>
 		<li class="ars">
-		<a href="exam.php" style="color:#003399;font-family:Calibri;font-size:21px;">Exams</a>
+		<a href="#" class="exam" style="color:#003399;font-family:Calibri;font-size:21px;">Exams</a>
 		</li>
 		<li class="ars">
-		<a href="history.php" style="color:#003399;font-family:Calibri;font-size:21px">History</a>
+		<a href="history.php" style="color:#003399;font-family:Calibri;font-size:21px">Placement Process</a>
 		</li>
       </ul>
       </li>

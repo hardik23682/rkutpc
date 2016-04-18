@@ -9,13 +9,17 @@
 		<div class="modal-content" style="height:100%">
 			<div class="modal-body" style="height:100%">
 				<form class="form-horizontal col-lg-12" role="form" method="post" action="">
-					<?php if(!empty($error)) { ?>
-						<div class="alert fade in" style="background-color: white;"><?=$error;?></div>
+					<?php if(!empty($error)) 
+					{ 
+					?>	
+					<div class="alert fade in" style="background-color: white;">
+					<?=$error;?></div>
 					<?php } ?>
-					<?php echo form_open('sitecontroller/sreg', array(
-						'id' => 'frmcreg',
-						'role' => 'form'
-					));?>
+					<?php 
+						echo form_open('sitecontroller/sreg', 
+						array('id' => 'frmcreg',
+						'role' => 'form'));
+						?>
 					<fieldset>
 						<legend>Student Register</legend>
 						<div class="form-group">

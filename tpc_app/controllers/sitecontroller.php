@@ -47,30 +47,40 @@ class SiteController extends CI_Controller
                 $pass = $this->input->post('pass');
                 $submit = $this->input->post('submit');
 
-                if (isset($submit)) {
+                if (isset($submit)) 
+				{
                     $res = $this->sitemodel->login($uname, $pass);
                 }
 
-                if ($res['valid']) {
-                    if ($res['is_approved'] == 1) {
+                if ($res['valid']) 
+				{
+                    if ($res['is_approved'] == 1) 
+					{
                         $this->session->set_userdata('logged_in', $res);
                         if ($res['type'] == 'company')
                             $this->load->view("ccomany");
                         else if ($res['type'] == 'student')
-                            $this->load->view("student");
+                            //$this->load->view("student");
+							redirect('cstudent/index');
                         else
                             $this->load->view("institute");
-                    } else
+                    } 
+					else
                         $error = "Your account not activated by Administrator. Please try after sometime";
-                } else {
+                } 
+				else 
+				{
                     $error = "Invalid Credential";
                 }
-            } else {
+            } 
+			else 
+			{
                 $error = validation_errors();
             }
             $data['error'] = $error;
-            $this->load->template('vhome', $data);
-        } else
+            $this->load->template('vhome',$data);
+        } 
+		else
             $this->load->template('vhome');
     }
 
