@@ -11,7 +11,6 @@
 	<link href="<?php echo base_url(); ?>/tpc_asset/css/bootstrap-datepicker3.min.css" rel="stylesheet">
 	<link href="<?php echo base_url(); ?>/tpc_asset/css/bootstrap-fileupload.min.css" rel="stylesheet">
 	<link href="<?php echo base_url(); ?>/tpc_asset/css/bootstrap-theme.css" rel="stylesheet">
-
 <link rel="icon"
       type="image/png" 
       href="<?php echo base_url(); ?>/tpc_asset/img/rkulogo.png" />
@@ -54,7 +53,7 @@ background-color:#FFFFFF;
   			<div class="container-fluid" style="background-color:#EEE;padding:0">
     <!-- Brand and toggle get grouped for better mobile display -->
     			<div class="navbar-header">
-     				 <button type="button" class="navbar-toggle collapsed" data-toggle=	 							"collapse" data-target="#bs-example-navbar-collapse-1" 
+     				 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
 					 			aria-expanded="false">
        							<span class="sr-only">Toggle navigation</span>
         						<span class="icon-bar"></span>
@@ -71,7 +70,6 @@ background-color:#FFFFFF;
 						<a href="index" style="color:blue;font-family:Calibri;font-size:20px;">Dashboard</a>
 						</li>
 		
-			
 			<li class="dropdown ar" style="text-align:center;">
 		          <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="
 				  color:blue;font-family:Calibri;font-size:20px;">Campus Drive<span class="caret">

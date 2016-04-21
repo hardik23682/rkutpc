@@ -47,15 +47,18 @@ class SiteController extends CI_Controller
                 $pass = $this->input->post('pass');
                 $submit = $this->input->post('submit');
 
-                if (isset($submit)) {
+                if (isset($submit))
+                {
                     $res = $this->sitemodel->login($uname, $pass);
                 }
 
                 if ($res['valid']) {
                     if ($res['is_approved'] == 1) {
                         $this->session->set_userdata('logged_in', $res);
-                        if ($res['type'] == 'company')
-                            $this->load->view("ccomany");
+                        if ($res['type'] == 'company') {
+                            $this->session->set_flashdata('email',$uname);
+                            redirect(base_url() . 'ccompany');
+                        }
                         else if ($res['type'] == 'student')
                             $this->load->view("student");
                         else
@@ -89,6 +92,31 @@ class SiteController extends CI_Controller
         $this->load->template('intreg');
     }
 
+    public function number()
+    {
+        $nm=$this->input->post('name');
+        if(preg_match('~[0-9]~',$nm))
+        {
+            $this->form_validation->set_message('number', 'number(s) not allowed in Company %s');
+            return false;
+        }
+        else
+            return true;
+    }
+
+    public function checkpass()
+    {
+        $pass=$this->input->post('pass');
+
+        if(!preg_match("/^(?=.*\d)(?=.*[A-Za-z])(?=.*[!@#$%])[0-9A-Za-z!@#$%]{8,20}$/",$pass))
+        {
+            $this->form_validation->set_message('checkpass', '%s must contain minimum 8 characters and maximum 20 characters of letters, numbers and at least one special character.');
+            return false;
+        }
+        else
+            return true;
+    }
+
     public function creg()
     {
         //this will get data from form
@@ -99,6 +127,41 @@ class SiteController extends CI_Controller
                 array(
                     'field' => 'name',
                     'label' => 'Name',
+                    'rules' => 'required|callback_number',
+                    'errors' => array(
+                        'required' => 'You must provide a %s'
+                    )
+                ),
+                array(
+                    'field' => 'email',
+                    'label' => 'Email Id',
+                    'rules' => 'required|valid_email|is_unique[login.username]',
+                    'errors' => array(
+                        'required' => 'You must provide a %s',
+                        'valid_email' => '%s is not valid',
+                        'is_unique' => '%s Already Registered'
+                    )
+                ),
+                array(
+                    'field' => 'pass',
+                    'label' => 'Password',
+                    'rules' => 'required|callback_checkpass',
+                    'errors' => array(
+                        'required' => 'You must provide a %s'
+                    )
+                ),
+                array(
+                    'field' => 'cpass',
+                    'label' => 'Confirm Passowrd',
+                    'rules' => 'required|matches[pass]',
+                    'errors' => array(
+                        'required' => 'You must provide a %s',
+                        'matches' => 'Password & %s is not match'
+                    )
+                ),
+                array(
+                    'field' => 'city',
+                    'label' => 'City',
                     'rules' => 'required|alpha',
                     'errors' => array(
                         'required' => 'You must provide a %s',
@@ -106,50 +169,15 @@ class SiteController extends CI_Controller
                     )
                 ),
                 array(
-                    'field' => 'email',
-                    'label' => 'Email Id',
-                    'rules' => 'required|valid_email|is_unique[company_master.email]',
+                    'field' => 'tc',
+                    'label' => 'Terms & Conditions',
+                    'rules' => 'required',
                     'errors' => array(
-                        'required' => 'You must provide a %s',
-                        'valid_email' => '%s is not valid',
-                        'is_unique' => '%s Already Registered'
-                    ),
-                ),
-                    array(
-                        'field' => 'pass',
-                        'label' => 'Password',
-                        'rules' => 'required',
-                        'errors' => array(
-                            'required' => 'You must provide a %s'
-                        )
-                    ),
-                    array(
-                        'field' => 'cpass',
-                        'label' => 'Confirm Passowrd',
-                        'rules' => 'matches[pass]',
-                        'errors' => array(
-                            'matches' => 'Password & %s is not match'
-                        )
-                    ),
-                    array(
-                        'field' => 'city',
-                        'label' => 'City',
-                        'rules' => 'required|alpha',
-                        'errors' => array(
-                            'required' => 'You must provide a %s',
-                            'alpha'=>'Must enter characters only in %s'
-                        )
-                    ),
-                    array(
-                        'field' => 'tc',
-                        'label' => 'Terms & Conditions',
-                        'rules' => 'required',
-                        'errors' => array(
-                            'required' => 'You must agree with %s'
-                        )
+                        'required' => 'You must agree with %s'
                     )
+                )
             );
-
+            $this->form_validation->set_error_delimiters('<span class="label label-warning">', '</span>');
             $this->form_validation->set_rules($config);
 
             if ($this->form_validation->run() == true) {
@@ -227,7 +255,7 @@ class SiteController extends CI_Controller
                 array(
                     'field' => 'email',
                     'label' => 'Email Id',
-                    'rules' => 'required|valid_email|is_unique[stud_master.email]',
+                    'rules' => 'required|valid_email|is_unique[login.username]',
                     'errors' => array(
                         'required' => 'You must provide a %s',
                         'valid_email' => '%s is not valid',
@@ -237,7 +265,7 @@ class SiteController extends CI_Controller
                 array(
                     'field' => 'pass',
                     'label' => 'Password',
-                    'rules' => 'required',
+                    'rules' => 'required|callback_checkpass',
                     'errors' => array(
                         'required' => 'You must provide a %s'
                     )
@@ -245,9 +273,18 @@ class SiteController extends CI_Controller
                 array(
                     'field' => 'cpass',
                     'label' => 'Confirm Passowrd',
-                    'rules' => 'matches[pass]',
+                    'rules' => 'required|matches[pass]',
                     'errors' => array(
+                        'required' => 'You must provide a %s',
                         'matches' => 'Password & %s is not match'
+                    )
+                ),
+                array(
+                    'field' => 'gender',
+                    'label' => 'Gender',
+                    'rules' => 'required',
+                    'errors' => array(
+                        'required' => 'Please choose %s'
                     )
                 ),
                 array(
@@ -268,7 +305,7 @@ class SiteController extends CI_Controller
                     )
                 )
             );
-
+            $this->form_validation->set_error_delimiters('<span class="label label-warning">', '</span>');
             $this->form_validation->set_rules($config);
 
             if ($this->form_validation->run() == true)
@@ -342,7 +379,7 @@ class SiteController extends CI_Controller
                 array(
                     'field' => 'email',
                     'label' => 'Email Id',
-                    'rules' => 'required|valid_email|is_unique[school_master.email]',
+                    'rules' => 'required|valid_email|is_unique[login.username]',
                     'errors' => array(
                         'required' => 'You must provide a %s',
                         'valid_email' => '%s is not valid',
@@ -352,7 +389,7 @@ class SiteController extends CI_Controller
                 array(
                     'field' => 'pass',
                     'label' => 'Password',
-                    'rules' => 'required',
+                    'rules' => 'required|callback_checkpass',
                     'errors' => array(
                         'required' => 'You must provide a %s'
                     )
@@ -360,8 +397,9 @@ class SiteController extends CI_Controller
                 array(
                     'field' => 'cpass',
                     'label' => 'Confirm Passowrd',
-                    'rules' => 'matches[pass]',
+                    'rules' => 'required|matches[pass]',
                     'errors' => array(
+                        'required' => 'You must provide a %s',
                         'matches' => 'Password & %s is not match'
                     )
                 ),
@@ -383,7 +421,7 @@ class SiteController extends CI_Controller
                     )
                 )
             );
-
+            $this->form_validation->set_error_delimiters('<span class="label label-warning">', '</span>');
             $this->form_validation->set_rules($config);
 
             if ($this->form_validation->run() == true) {
@@ -409,7 +447,8 @@ class SiteController extends CI_Controller
                 //here check that data is inserted or not and redirect according
                 //insert method will return 0 or 1
                 if (isset($s)) {
-                    if ($s == 1) {
+                    if ($s == 1)
+                    {
                         $success = "Your request is received, Please wait for Admin approval";
                         $data['success'] = $success;
                         $data['reset']=true;
