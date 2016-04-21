@@ -76,7 +76,7 @@ background-color:#FFFFFF;
 				  </span></a>
 				  <ul class="dropdown-menu animated pulse" role="menu" style="background-color:rgba(255, 66, 66, 0.85);width:100%">
 		            <li style="text-align:center;font-family:Calibri;font-size:18px;letter-spacing:1px;font-weight:lighter">
-					<a style="color:blue;font-family:Calibri" href="">ADD Drive</a></li>
+					<a style="color:blue;font-family:Calibri" href="<?php echo base_url(); ?>ccompany/addDrive">ADD Drive</a></li>
 					<li style="text-align:center;font-family:Calibri;font-size:18px;letter-spacing:1px;font-weight:lighter">
 					<a style="color:blue;font-family:Calibri" href="#">Modify Drive</a></li>
 		          </ul>
