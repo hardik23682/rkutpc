@@ -91,18 +91,13 @@ $(document).ready(function(){
 				<div class="col-lg-12" style="padding-top:0px;border-radius:5px;letter-spacing:1px;border:solid 1px;background: #Ffffff;">
 					<img src="<?php echo base_url();?>/tpc_asset/rku/01.png" class="img-responsive" alt="Company Logo">
 
-<<<<<<< HEAD
 					<div class="col-lg-12" style="letter-spacing:1px;border:solid 0px;margin-left:-15px;padding:5px;">
 						
 						<div><img src="<?php echo base_url();?>/tpc_asset/img/tt.jpg" style="width:75px" alt="Company Logo"></div>
 						<div style="margin-top:-48px;padding-top:10px;color:#FFFFFF;margin-left:50px;background-color:#D20000;height:48px;border-top-right-radius:25px;border-bottom-right-radius:25px;border:1;width:200px;word-wrap: break-word;text-transform:capitalize;">Tata Consultancy services</div>
-=======
-					<div class="col-lg-12" style="letter-spacing:1px;border:solid 1px;background: #Ffffff;margin-left:-20px;padding:5px;box-shadow:5px -1px 3px 2px #D3D3D3">
-						<h5>TCS - Gandinagar</h5>
->>>>>>> origin/master
 					</div>
 						<div class="col-lg-12" style="padding-top:5px;letter-spacing: 2px;">
-							<a href="<?php echo base_url(); ?>ccompany/editprofile">Edit Profile</a></h5>&nbsp;|&nbsp;
+							<a href="<?php echo base_url(); ?>ccompany/profile">Edit Profile</a></h5>&nbsp;|&nbsp;
 							<a href="#" style="letter-spacing:1px">Logout</a>
 						</div><br>&nbsp;
 
@@ -115,18 +110,8 @@ $(document).ready(function(){
 			</div>
 
 	<div class="col-lg-9">
-<<<<<<< HEAD
-		<?php if(!empty($error)) { ?>
-			<div class="alert fade in alert-danger" style="color: white;"><?=$error;?></div>
-		<?php } ?>
-		<?php if(!empty($success)) { ?>
-			<div class="alert fade in alert-success"><b><?=$success;?></b></div>
-		<?php }
-		else
-			$reset=false;
-		?>
-=======
->>>>>>> origin/master
+		<?php if(!empty($success)) echo "<div class='alert alert-success'><b> $success</b></div>";?>
+
 	<div class="col-lg-6 btncurr" style="cursor:pointer;background-color: #337AB7;padding:15px;font-size:20px;letter-spacing:1px;font-weight:lighter;font-family:Calibri;color:#FFFFFF">Current Job Statistics</div>
 		<div class="col-lg-6  btnlink" style="text-align: right;cursor:pointer;background-color: #337AB7;padding:15px;font-size:20px;letter-spacing:1px;font-weight:lighter;font-family:Calibri;color:#FFFFFF">
 			<a href="#" style="color: white">Edit</a>&nbsp;|&nbsp;<a href="<?php echo base_url(); ?>ccompany/addDrive" style="color: white;">+ Post New Drive</a></div>
@@ -136,17 +121,13 @@ $(document).ready(function(){
 				<p style="font-size:18px;font-family: Calibri;letter-spacing: 1px">
 				We are arrange TCS Drive on 20th April 2016 ,in which eligible student from stream of MCA , BCA ,BSC IT, BE .
 In this  drive  3 Rounds As Below
-1)	  aptitude Round
+1)	 Aptitude Round
 2)	 Practical Round
 3)	 Personal Round<br><br>
 					-> Last Date Of Regition : 30th Marth 2016.
 				</p>
 			</div>
-<<<<<<< HEAD
 		<div class="col-lg-4" style="border: solid 0px;height:300px;">
-=======
-		<div class="col-lg-4" style="border: solid 0px;height:250px;">
->>>>>>> origin/master
 			<button class="btn btnchart col-lg-6" style="margin-top:10px;border-radius:0px;font-family: Calibri;color:red;letter-spacing: 1px">View In Graph</button>
 			<button class="btn  btndetails col-lg-6" style="margin-top:10px;border-radius:0px;font-family: Calibri;color: red;letter-spacing: 1px">View Details</button>
 			<div class="chart" style="font-family: Calibri;font-size:20px;letter-spacing:1px;padding:10px">
@@ -175,15 +156,4 @@ In this  drive  3 Rounds As Below
 			</div>
 		</div>
 	</div>
-<<<<<<< HEAD
- </body> 
-=======
-	</div>
-</div>
-</div>
-      </div>
-	  </div>
-      </div>
-	  <div class="col-lg-12" style="height:20px">&nbsp;</div>
-    </body> 
->>>>>>> origin/master
+ </body>

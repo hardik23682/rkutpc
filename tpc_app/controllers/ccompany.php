@@ -2,6 +2,8 @@
 
 class Ccompany extends CI_Controller
 {
+	public $cid='';
+
 	public function __construct()
 	{
 		parent::__construct();
@@ -12,10 +14,10 @@ class Ccompany extends CI_Controller
 
     public function index()
 	{
-		$email=$this->session->flashdata('email');
-		$res=$this->mcompany->getdata($email);
+		$cid=$this->session->userdata('cid');
+		$res=$this->mcompany->getdata($cid);
 
-		if(!empty($res['esyr']))
+		if(!empty($res['esyear']))
 			$this->home();
 		else
 			$this->profile();
@@ -26,34 +28,12 @@ class Ccompany extends CI_Controller
 		$this->load->view('company/header');
 		$this->load->view('company/dashboard');
 		$this->load->view('company/footer');
-<<<<<<< HEAD
-	}
-
-	public function upload()
-	{
-		$config['upload_path'] = dirname($_SERVER["SCRIPT_FILENAME"]).base_url()."/tcp_asset/cmp_prof/";
-		$config['upload_url']  = base_url()."/tcp_asset/cmp_prof/";
-		$config['allowed_types'] = 'jpg|png';
-		$config['max_size']    = '100';
-		$config['overwrite']=true;
-		$this->upload->initialize($config);
-		if (!$this->upload->do_upload('logo'))
-		{
-			$this->form_validation->set_message('upload', '%s is required please select it');
-			return false;
-		}
-		else
-		{
-			$image_data = $this->upload->data();
-			$filename = $image_data['file_name'];
-			return true;
-		}
 	}
 
 	public function profile()
 	{
-		$email=$this->session->flashdata('email');
-		$res=$this->mcompany->getdata($email);
+		$cid=$this->session->userdata('cid');
+		$res=$this->mcompany->getdata($cid);
 
 		$submit = $this->input->post('submit');
 		if (isset($submit)) {
@@ -151,16 +131,24 @@ class Ccompany extends CI_Controller
 					)
 				),
 				array(
-					'field' => 'logo',
-					'label' => 'Company Logo',
-					'rules' => 'callback_upload'
-				)
+					'field' => 'con2',
+					'label' => 'Contact Number 2',
+					'rules' => 'numeric',
+					'errors' => array(
+						'numeric'=>'%s must be number'
+					)
+				),
 			);
 
 			$this->form_validation->set_error_delimiters('<span class="label label-danger">', '</span>');
 			$this->form_validation->set_rules($config);
 
-			if ($this->form_validation->run() == true)
+			$config['upload_path']          = './tpc_asset/company/prof';
+			$config['allowed_types']        = 'gif|jpg|png';
+
+			$this->load->library('upload', $config);
+
+			if ($this->form_validation->run() == true && $this->upload->do_upload('logo'))
 			{
 				$name='';
 				$city='';
@@ -190,6 +178,9 @@ class Ccompany extends CI_Controller
 					'con2'=>$con2
 				);
 
+				$idata=$this->upload->data();
+				$data['prof_pic'] = base_url("tpc_asset/company/prof/" . $idata['raw_name'] . $idata['file_ext']);
+
 				$submit = $this->input->post('submit');
 				if (isset($submit)) {
 					$s = $this->mcompany->update_profile($data);
@@ -209,6 +200,8 @@ class Ccompany extends CI_Controller
 			{
 				$error = validation_errors();
 				$data['error'] = $error;
+				$data['upload_error'] = $this->upload->display_errors();
+
 				$this->load->view('company/header');
 				$this->load->view('company/vcdetailform', $data);
 				$this->load->view('company/footer');
@@ -364,23 +357,106 @@ class Ccompany extends CI_Controller
 						'required' => 'You must provide %s',
 						'valid_email'=> '%s must be valid'
 					)
+				),
+				array(
+					'field' => 'venue',
+					'label' => 'Drive Venue',
+					'rules' => 'required',
+					'errors' => array(
+						'required' => 'You must provide %s'
+					)
+				),
+				array(
+					'field' => 'dtype',
+					'label' => 'Drive type',
+					'rules' => 'required',
+					'errors' => array(
+						'required' => 'You must provide %s'
+					)
 				)
 			);
 
 			$this->form_validation->set_error_delimiters('<span class="label label-danger">', '</span>');
 			$this->form_validation->set_rules($config);
 
-			if ($this->form_validation->run() == true)
+			$config['upload_path']          = './tpc_asset/company/attachments';
+			$config['allowed_types']        = 'gif|jpg|png';
+
+			$this->load->library('upload', $config);
+
+			if ($this->form_validation->run() == true && $this->upload->do_upload('attachment'))
 			{
+				$jtitle = '';
+				$jdetail = '';
+				$jlocation = '';
+				$skrd = '';
+				$eligible = '';
+				$pos = '';
+				$ctc = '';
+				$yr = array();
+				$br = array();
+				$bddetails = '';
+				$lrdate = '';
+				$jdate = '';
+				$ddate = '';
+				$sp = array();
+				$cperson = '';
+				$mno = '';
+				$email = '';
+				$otherinfo = '';
+				$dtype='';
+				$venue='';
+
+
+				extract($_POST);
+
+				$data = array(
+					'jtitle' => $jtitle,
+					'jdetail' => $jdetail,
+					'jlocation' => $jlocation,
+					'skrd' => $skrd,
+					'eligible' => $eligible,
+					'pos' => $pos,
+					'ctc' => $ctc,
+					'yr' => implode(",",$yr),
+					'br' => implode(",",$br),
+					'bddetails' => $bddetails,
+					'lrdate' => $lrdate,
+					'jdate' => $jdate,
+					'ddate' => $ddate,
+					'sp' => implode(",",$sp),
+					'cperson' => $cperson,
+					'mno' => $mno,
+					'email' => $email,
+					'otherinfo' => $otherinfo,
+					'dtype'=>$dtype,
+					'company_id'=>$this->session->userdata('cid'),
+					'venue'=>$venue
+				);
+				$idata=$this->upload->data();
+				$data['attachment'] = base_url("tpc_asset/company/attachments/" . $idata['raw_name'] . $idata['file_ext']);
+				$submit = $this->input->post('submit');
+				if (isset($submit))
+				{
+					$s = $this->mcompany->addDrive($data);
+					if ($s > 0)
+					{
+						$success = "Your Drive is successfully added, Please wait for TPO approval";
+						$data['success'] = $success;
+						$data['reset'] = true;
+						$this->load->view('company/header');
+						$this->load->view('company/dashboard', $data);
+						$this->load->view('company/footer');
+					}
+				}
 			}
 			else
 			{
-				$error = validation_errors();
+				$upload_error = $this->upload->display_errors();
+				$this->load->view('company/header');
+				$this->load->view('company/adddriveform', compact('upload_error'));
+				$this->load->view('company/footer');
 			}
-			$data['error'] = $error;
-			$this->load->view('company/header');
-			$this->load->view('company/adddriveform', $data);
-			$this->load->view('company/footer');
 		}
 		else
 		{
@@ -388,20 +464,6 @@ class Ccompany extends CI_Controller
 			$this->load->view('company/adddriveform');
 			$this->load->view('company/footer');
 		}
-=======
    	} 
-	public function editprofile()
-	{
-		$this->load->view('company/header');
-		$this->load->view('company/vcdetailform');
-		$this->load->view('company/footer');
-	}
-	public function adddrive()
-	{
-		$this->load->view('company/header');
-		$this->load->view('company/adddriveform');
-		$this->load->view('company/footer');
->>>>>>> origin/master
-	}
 }
 ?>
