@@ -28,6 +28,9 @@ background-color:#FFFFFF;
 </style>
 </head>
 <body>
+<?php if(!$records)
+		die("Not Records Found"); 
+?>
 <div class="col-xs-12" style="border:solid 1px #D3D3D3;padding:5px;margin-top:1%;background:#EEE;border-radius:5px">
 					<div class="col-xs-6" style="border:solid 0px #D3D3D3;padding:5px;background:#EEE;color:#0033CC;letter-spacing:1;font-family:Calibri;font-size:20px">Job Title&nbsp;&nbsp;</div>
 					<div class="col-xs-6" style="border:solid 0px #D3D3D3;padding:5px;background:#EEE;color:#0033CC;letter-spacing:1;font-family:Calibri;font-size:20px">

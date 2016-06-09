@@ -1,179 +1,122 @@
 <script>
 $(document).ready(function(){
     $(window).load(function(){
-        $(".result").slideUp();
+        $(".pastcal").hide();
+		$(".upbtn").css("background-color","white");
+		$(".upbtn").css("color","red");
+		$(".upbtn").css("border-bottom","0");
+		$(".pastbtn").css("border-bottom","0");
+		$(".pastbtn").css("background-color","#D3D3D3");
+		$(".pastbtn").css("color","red");
+		$(".fevent").slideUp();
     });
-    $(".btn2").click(function(){
-        $(".result").slideToggle();
+    $(".upbtn").click(function(){
+        $(".upcal").show();
+		$(".pastcal").hide();
+		$(".upbtn").css("background-color","white");
+		$(".upbtn").css("color","red");
+		$(".pastbtn").css("background-color","#D3D3D3");
+		$(".pastbtn").css("color","red");	
+    });	 
+	$(".pastbtn").click(function(){
+        $(".pastcal").show();
+		$(".upcal").hide();
+		$(".pastbtn").css("background-color","white");
+		$(".pastbtn").css("color","red");
+		$(".upbtn").css("background-color","#D3D3D3");
+		$(".upbtn").css("color","red");
+
     });
 });
 </script>
 <div class="col-lg-3" style="padding:10px;background-color:#FFFFFF;">
-					<div class="col-lg-12" style="border:solid 1px #D3D3D3;padding:5px;background:#EEE">
-					<div class="col-lg-6" style="padding-top:0px;">
-					<img src="<?php echo base_url();?>/tpc_asset/img/people/3.png" 
-					style="border-radius:5px" class="img-responsive">
-					</div>
-					<div class="col-lg-6" style="padding-top:15px;letter-spacing: 2px">
-					<a href="profile">Edit Profile</a></h5>
-						<a href="#" style="letter-spacing:1px">Logout</a></div>
-					<div class="col-lg-12" style="padding:5px;padding-left:0px">
-					<h5 style="letter-spacing:1px;border:solid 1px;background: #Ffffff;padding: 10px">Rahul Trivedi</h5>
-					</div>
-					</div>
-	<div class="col-lg-12" style="padding:0px;border:solid 1px #D3D3D3">
-		<div class="col-lg-12" style="padding:5px;border:solid 1px #D3D3D3">
-			<h3 style="letter-spacing:1px;background: #Ffffff;">Notification</h3>
-		</div>
-			<div class="col-lg-12" style="padding:10px">
-				<marquee direction="up" onmouseover="stop()" onmouseout="start();">
-					<div style="letter-spacing: 2px">Gallor Event Is Going On !!!</div>
-				</marquee>
-				</div>
-
-		</div>
-	<div class="col-lg-12" style="padding:10px;border:solid 1px #D3D3D3">
-		<a href="event">
-		<img src="<?php echo base_url(); ?>/tpc_asset/img/eventcala.png" class="img-responsive" /></a>
-		</div>
-	</div>
+<?php include_once('student_left.php'); ?>				
+</div>
 <div class="col-lg-9" style="border:solid  0px #D6D6D6;padding:0;background-color:#FFFFFF;padding-left:5px;padding-right:5px">
-	<div class="col-lg-12" style="padding-top:10px">
-		<div class="widget widget-nopad">
-            <div class="widget-header"> <i class="icon-list-alt"></i>
-              <h3> Recent News</h3>
-            </div>
-            <!-- /widget-header -->
-            <div class="widget-content">
-              <div id='calendar'>
-              </div>
-            </div>
-            <!-- /widget-content --> 
-          </div>
+	<!-- Event_class -->
+	<!-- 1 --><div col-lg-12 style="padding-top:10px">
+		<!-- 2 --><div class="col-lg-4 col-xs-12 btn btn-defuult upbtn" style="font-family:Calibri;font-size:24px;font-weight:lighter;border-radius:7px;cursor:pointer;border:solid 1px;letter-spacing:2px;border-bottom-left-radius:0px;border-bottom-right-radius:0px;">
+Upcoming Event
+		</div>
+		<!-- 3 --><div class="col-lg-4 col-xs-12 btn btn-defuult pastbtn" style="font-family:Calibri;font-size:24px;font-weight:lighter;border-radius:7px;background-color:#D3D3D3;border-radius:7px;cursor:pointer;border:solid 1px;letter-spacing:2px;color:#0000FF;border-bottom-left-radius:0px;border-bottom-right-radius:0px;">
+Past Event</div>
+			<div class="col-lg-4 col-xs-12 btn btn-defuult" style="font-family:Calibri;font-size:24px;font-weight:lighter;background-color:#D3D3D3;border-radius:7px;cursor:pointer;border:solid 1px;letter-spacing:2px;color:#0000FF;border-bottom-left-radius:0px;border-bottom-right-radius:0px;">
+			<?= "Today : ".date("d-m-Y"); ?>
 </div>
+		</div>	
+		
+	<div class="col-lg-12 col-xs-12" style="border-bottom:solid 1px;border-right:solid 1px;;border-left:solid 1px;border-bottom-left-radius:5px;border-bottom-right-radius:5px;border-color:#FF0000;font-size:18px;font-family:Calibri" >	
+	<br/>
+	<?php
+	if(isset($records))
+	{
+		foreach($records as $row)
+		{
+				$originalDate = $row->event_date;
+				$newDate = date("d-m-Y", strtotime($originalDate));
+				$datetime1 =date_create($row->event_date);
+				$datetime2 =new DateTime("now");
+				$interval = date_diff($datetime1, $datetime2);
+				if($interval->format('%R%a') <= 0)
+				{
+	?>		
+	<!-- 4 --><div class="col-lg-12 col-xs-12 upcal">
+			<!-- 5 --><div class="col-lg-12" style="border:solid  1px;padding:0px;margin-bottom:10px;background-color:#d3d3d3;">
+					<!-- 6 --><div class="col-lg-3" style="background-color:#0066CC;color:#FFFFFF;padding:5px;text-align:center">>&nbsp;&nbsp;<?= $newDate ?>
+					
+					</div>
+					<!-- 7 --><div class="col-lg-7" style="background-color:#FFFFFF;color:#0066CC;padding:5px;">&nbsp;&nbsp;<?= $row->event_name ?>
+					
+					</div>
+					<!-- 8 --><div class="col-lg-2" style="background-color:#FFFFFF;color:#0066CC;padding:5px;">&nbsp;&nbsp;<a class="viewevent" onclick="$('.fevent<?= $row->id  ?>').slideToggle('slow')" style="text-decoration:none;cursor:pointer">View Event</a>
+	</div>
+					<!-- 9 --><div class="col-lg-12 fevent<?= $row->id  ?> fevent" style="padding:10px;margin-bottom:10px;background-color:#d3d3d3">
+						<!-- 10 --><div class="col-lg-6" style="background-color:white;padding:10px;border-radius:5px">
+	<a><img style="border-radius:7px;" src="<?php echo base_url();?>/tpc_asset/img/rkuga.jpg" class="img-responsive" /></a>
+	</div>
+						<!-- 11 --><div class="col-lg-6" style="padding:10px;font-family:Calibri;letter-spacing:1px;font-size:20px">
+	Date -> <?= $newDate ?><br />
+	Event Title -> <?= $row->event_name ?><br />
+	<?= $row->event_details ?>
+			</div>
+	</div>
+	</div>
+	</div>
+	<?php 
+		}
+		else if($interval->format('%R%a') > 0)
+		{
+	?>		
+	<!-- 4 --><div class="col-lg-12 col-xs-12 pastcal">
+			<!-- 5 --><div class="col-lg-12" style="border:solid  1px;padding:0px;margin-bottom:10px;background-color:#d3d3d3;">
+					<!-- 6 --><div class="col-lg-3" style="background-color:#0066CC;color:#FFFFFF;padding:5px;text-align:center">>&nbsp;&nbsp;<?= $newDate ?>
+					
+					</div>
+					<!-- 7 --><div class="col-lg-7" style="background-color:#FFFFFF;color:#0066CC;padding:5px;">&nbsp;&nbsp;<?= $row->event_name ?>
+					
+					</div>
+					<!-- 8 --><div class="col-lg-2" style="background-color:#FFFFFF;color:#0066CC;padding:5px;">&nbsp;&nbsp;<a class="viewevent" onclick="$('.fevent<?= $row->id  ?>').slideToggle('slow')" style="text-decoration:none;cursor:pointer">View Event</a>
+	</div>
+					<!-- 9 --><div class="col-lg-12 fevent<?= $row->id  ?> fevent" style="padding:10px;margin-bottom:10px;background-color:#d3d3d3">
+						<!-- 10 --><div class="col-lg-6" style="background-color:white;padding:10px;border-radius:5px">
+	<a><img style="border-radius:7px;" src="<?php echo base_url();?>/tpc_asset/img/rkuga.jpg" class="img-responsive" /></a>
+	</div>
+						<!-- 11 --><div class="col-lg-6" style="padding:10px;font-family:Calibri;letter-spacing:1px;font-size:20px">
+	Date -> <?= $newDate ?><br />
+	Event Title -> <?= $row->event_name ?><br />
+	<?= $row->event_details ?>
+			</div>
+	</div>
+	</div>
+	</div>
+	<?php
+	} 
+	}
+	}
+	?>
+							</div>
+	<!-- end Event_class -->
+	</div>
 </div>
-<script>     
-
-        var lineChartData = {
-            labels: ["January", "February", "March", "April", "May", "June", "July"],
-            datasets: [
-				{
-				    fillColor: "rgba(220,220,220,0.5)",
-				    strokeColor: "rgba(220,220,220,1)",
-				    pointColor: "rgba(220,220,220,1)",
-				    pointStrokeColor: "#fff",
-				    data: [65, 59, 90, 81, 56, 55, 40]
-				},
-				{
-				    fillColor: "rgba(151,187,205,0.5)",
-				    strokeColor: "rgba(151,187,205,1)",
-				    pointColor: "rgba(151,187,205,1)",
-				    pointStrokeColor: "#fff",
-				    data: [28, 48, 40, 19, 96, 27, 100]
-				}
-			]
-
-        }
-
-        var myLine = new Chart(document.getElementById("area-chart").getContext("2d")).Line(lineChartData);
-
-
-        var barChartData = {
-            labels: ["January", "February", "March", "April", "May", "June", "July"],
-            datasets: [
-				{
-				    fillColor: "rgba(220,220,220,0.5)",
-				    strokeColor: "rgba(220,220,220,1)",
-				    data: [65, 59, 90, 81, 56, 55, 40]
-				},
-				{
-				    fillColor: "rgba(151,187,205,0.5)",
-				    strokeColor: "rgba(151,187,205,1)",
-				    data: [28, 48, 40, 19, 96, 27, 100]
-				}
-			]
-
-        }    
-
-        $(document).ready(function() {
-        var date = new Date();
-        var d = date.getDate();
-        var m = date.getMonth();
-        var y = date.getFullYear();
-        var calendar = $('#calendar').fullCalendar({
-          header: {
-            left: 'prev,next today',
-            center: 'title',
-            right: 'month,agendaWeek,agendaDay'
-          },
-          selectable: true,
-          selectHelper: true,
-          select: function(start, end, allDay) {
-            var title = prompt('Event Title:');
-            if (title) {
-              calendar.fullCalendar('renderEvent',
-                {
-                  title: title,
-                  start: start,
-                  end: end,
-                  allDay: allDay
-                },
-                true // make the event "stick"
-              );
-            }
-            calendar.fullCalendar('unselect');
-          },
-          editable: true,
-          events: [
-            {
-              title: 'All Day Event',
-              start: new Date(y, m, 1)
-            },
-            {
-              title: 'Long Event',
-              start: new Date(y, m, d+5),
-              end: new Date(y, m, d+7)
-            },
-            {
-              id: 999,
-              title: 'Repeating Event',
-              start: new Date(y, m, d-3, 16, 0),
-              allDay: false
-            },
-            {
-              id: 999,
-              title: 'Repeating Event',
-              start: new Date(y, m, d+4, 16, 0),
-              allDay: false
-            },
-            {
-              title: 'Meeting',
-              start: new Date(y, m, d, 10, 30),
-              allDay: false
-            },
-            {
-              title: 'Lunch',
-              start: new Date(y, m, d, 12, 0),
-              end: new Date(y, m, d, 14, 0),
-              allDay: false
-            },
-            {
-              title: 'Birthday Party',
-              start: new Date(y, m, d+1, 19, 0),
-              end: new Date(y, m, d+1, 22, 30),
-              allDay: false
-            },
-            {
-              title: 'EGrappler.com',
-              start: new Date(y, m, 28),
-              end: new Date(y, m, 29),
-              url: 'http://EGrappler.com/'
-            }
-          ]
-        });
-      });
-    </script><!-- /Calendar -->
-
 </body>
 </html>
-

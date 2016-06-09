@@ -1,8 +1,7 @@
 <?php
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class DTD_Loader extends CI_Loader
-{
+class DTD_Loader extends CI_Loader {
     
 	public function template($template_name, $vars = array(), $return = FALSE)
     {

@@ -19,7 +19,6 @@ class Sitemodel extends CI_Model
             'password'=>md5($data['pass']),
             'type'=>'company'
         );
-
         //insert values into database
         return $this->db->insert("login",$fields);
     }

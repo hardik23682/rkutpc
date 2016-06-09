@@ -91,6 +91,7 @@ a:hover {
 }
 p {
 	font-family:'Varela Round';
+	color:#8997a7 !important;
 	line-height: 25px;
 	margin:10px 0;
 }

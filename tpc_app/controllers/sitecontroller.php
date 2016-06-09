@@ -14,7 +14,8 @@ class SiteController extends CI_Controller
     public function index()
     {
         $submit = $this->input->post('submit');
-        if (isset($submit)) {
+        if (isset($submit))
+        {
             $config = array(
                 array(
                     'field' => 'uname',
@@ -46,37 +47,44 @@ class SiteController extends CI_Controller
                 $pass = $this->input->post('pass');
                 $submit = $this->input->post('submit');
 
-                if (isset($submit)) {
-                    if (isset($submit)) {
-                        $res = $this->sitemodel->login($uname, $pass);
-                    }
-
-                    if ($res['valid']) {
-                        if ($res['is_approved'] == 1) {
-                            $this->session->set_userdata('logged_in', $res);
-                            if ($res['type'] == 'company')
-                            {
-                                $this->session->set_userdata('cid',$uname);
-                                redirect(base_url() . 'ccompany');
-                            }
-                            else if ($res['type'] == 'student')
-                                //$this->load->view("student");
-                                redirect('cstudent/index');
-                            else
-                                $this->load->view("institute");
-                        } else
-                            $error = "Your account not activated by Administrator. Please try after sometime";
-                    } else {
-                        $error = "Invalid Credential";
-                    }
-                } else {
-                    $error = validation_errors();
+                if (isset($submit)) 
+				{
+                    $res = $this->sitemodel->login($uname,$pass);
                 }
-                $data['error'] = $error;
-                $this->load->template('vhome', $data);
+
+                if ($res['valid']) 
+				{
+                    if ($res['is_approved'] == 1) 
+					{
+                        $this->session->set_userdata('logged_in', $res);
+						
+						//);
+                        if ($res['type'] == 'company')
+						{	
+							$this->session->set_userdata('cid',$uname);
+                            redirect('ccompany/index');
+						}
+                        else if ($res['type'] == 'student')
+							 redirect('cstudent/index'); 
+                        else
+                             redirect('ctpo/index');
+                    } 
+					else
+                        $error = "Your account not activated by Administrator. Please try after sometime";
+                } 
+				else 
+				{
+                    $error = "Invalid Credential";
+                }
+            } 
+			else 
+			{
+                $error = validation_errors();
             }
-        }
-        else
+            $data['error'] = $error;
+            $this->load->template('vhome',$data);
+        } 
+		else
             $this->load->template('vhome');
     }
 
@@ -95,27 +103,6 @@ class SiteController extends CI_Controller
         $this->load->template('intreg');
     }
 
-    public function number()
-    {
-        $nm = $this->input->post('name');
-        if (preg_match('~[0-9]~', $nm)) {
-            $this->form_validation->set_message('number', 'number(s) not allowed in Company %s');
-            return false;
-        } else
-            return true;
-    }
-
-    public function checkpass()
-    {
-        $pass = $this->input->post('pass');
-
-        if (!preg_match("/^(?=.*\d)(?=.*[A-Za-z])(?=.*[!@#$%])[0-9A-Za-z!@#$%]{8,20}$/", $pass)) {
-            $this->form_validation->set_message('checkpass', '%s must contain minimum 8 and maximum 20 characters,<br>atleast one number and atleast one special character.');
-            return false;
-        } else
-            return true;
-    }
-
     public function creg()
     {
         //this will get data from form
@@ -126,57 +113,57 @@ class SiteController extends CI_Controller
                 array(
                     'field' => 'name',
                     'label' => 'Name',
-                    'rules' => 'required|callback_number',
+                    'rules' => 'required|alpha',
                     'errors' => array(
-                        'required' => 'You must provide a %s'
+                        'required' => 'You must provide a %s',
+                        'alpha'=>'Must enter characters only in %s'
                     )
                 ),
                 array(
                     'field' => 'email',
                     'label' => 'Email Id',
-                    'rules' => 'required|valid_email|is_unique[login.username]',
+                    'rules' => 'required|valid_email|is_unique[company_master.email]',
                     'errors' => array(
                         'required' => 'You must provide a %s',
                         'valid_email' => '%s is not valid',
                         'is_unique' => '%s Already Registered'
-                    )
+                    ),
                 ),
-                array(
-                    'field' => 'pass',
-                    'label' => 'Password',
-                    'rules' => 'required|callback_checkpass',
-                    'errors' => array(
-                        'required' => 'You must provide a %s'
+                    array(
+                        'field' => 'pass',
+                        'label' => 'Password',
+                        'rules' => 'required',
+                        'errors' => array(
+                            'required' => 'You must provide a %s'
+                        )
+                    ),
+                    array(
+                        'field' => 'cpass',
+                        'label' => 'Confirm Passowrd',
+                        'rules' => 'matches[pass]',
+                        'errors' => array(
+                            'matches' => 'Password & %s is not match'
+                        )
+                    ),
+                    array(
+                        'field' => 'city',
+                        'label' => 'City',
+                        'rules' => 'required|alpha',
+                        'errors' => array(
+                            'required' => 'You must provide a %s',
+                            'alpha'=>'Must enter characters only in %s'
+                        )
+                    ),
+                    array(
+                        'field' => 'tc',
+                        'label' => 'Terms & Conditions',
+                        'rules' => 'required',
+                        'errors' => array(
+                            'required' => 'You must agree with %s'
+                        )
                     )
-                ),
-                array(
-                    'field' => 'cpass',
-                    'label' => 'Confirm Passowrd',
-                    'rules' => 'required|matches[pass]',
-                    'errors' => array(
-                        'required' => 'You must provide a %s',
-                        'matches' => 'Password & %s is not match'
-                    )
-                ),
-                array(
-                    'field' => 'city',
-                    'label' => 'City',
-                    'rules' => 'required|alpha',
-                    'errors' => array(
-                        'required' => 'You must provide a %s',
-                        'alpha' => 'Must enter characters only in %s'
-                    )
-                ),
-                array(
-                    'field' => 'tc',
-                    'label' => 'Terms & Conditions',
-                    'rules' => 'required',
-                    'errors' => array(
-                        'required' => 'You must agree with %s'
-                    )
-                )
             );
-            $this->form_validation->set_error_delimiters('<span class="label label-warning">', '</span>');
+
             $this->form_validation->set_rules($config);
 
             if ($this->form_validation->run() == true) {
@@ -204,7 +191,7 @@ class SiteController extends CI_Controller
                     if ($s == 1) {
                         $success = "Your request is received, Please wait for Admin approval";
                         $data['success'] = $success;
-                        $data['reset'] = true;
+                        $data['reset']=true;
                         $this->load->template('comreg', $data);
                     } else
                         echo "<script>alert('Data not Save');</script>";
@@ -214,7 +201,7 @@ class SiteController extends CI_Controller
             }
             if (isset($error)) {
                 $data['error'] = $error;
-                $data['reset'] = false;
+                $data['reset']=false;
                 $this->load->template('comreg', $data);
             }
         } else {
@@ -223,13 +210,15 @@ class SiteController extends CI_Controller
     }
 
 
+
     public function sreg()
     {
         //this will get data from form
         //start here
 
         $submit = $this->input->post('ssubmit');
-        if (isset($submit)) {
+        if (isset($submit))
+        {
             $config = array(
                 array(
                     'field' => 'fname',
@@ -237,7 +226,7 @@ class SiteController extends CI_Controller
                     'rules' => 'required|alpha',
                     'errors' => array(
                         'required' => 'You must provide a %s',
-                        'alpha' => 'Must enter characters only in %s'
+                        'alpha'=>'Must enter characters only in %s'
                     )
                 ),
                 array(
@@ -246,23 +235,23 @@ class SiteController extends CI_Controller
                     'rules' => 'required|alpha',
                     'errors' => array(
                         'required' => 'You must provide a %s',
-                        'alpha' => 'Must enter characters only in %s'
+                        'alpha'=>'Must enter characters only in %s'
                     )
                 ),
                 array(
                     'field' => 'email',
                     'label' => 'Email Id',
-                    'rules' => 'required|valid_email|is_unique[login.username]',
+                    'rules' => 'required|valid_email|is_unique[stud_master.email]',
                     'errors' => array(
                         'required' => 'You must provide a %s',
                         'valid_email' => '%s is not valid',
-                        'is_unique' => '%s Already Registered'
+                        'is_unique'=>'%s Already Registered'
                     )
                 ),
                 array(
                     'field' => 'pass',
                     'label' => 'Password',
-                    'rules' => 'required|callback_checkpass',
+                    'rules' => 'required',
                     'errors' => array(
                         'required' => 'You must provide a %s'
                     )
@@ -270,18 +259,9 @@ class SiteController extends CI_Controller
                 array(
                     'field' => 'cpass',
                     'label' => 'Confirm Passowrd',
-                    'rules' => 'required|matches[pass]',
+                    'rules' => 'matches[pass]',
                     'errors' => array(
-                        'required' => 'You must provide a %s',
                         'matches' => 'Password & %s is not match'
-                    )
-                ),
-                array(
-                    'field' => 'gender',
-                    'label' => 'Gender',
-                    'rules' => 'required',
-                    'errors' => array(
-                        'required' => 'Please choose %s'
                     )
                 ),
                 array(
@@ -290,7 +270,7 @@ class SiteController extends CI_Controller
                     'rules' => 'required|alpha',
                     'errors' => array(
                         'required' => 'You must provide a %s',
-                        'alpha' => 'Must enter characters only in %s'
+                        'alpha'=>'Must enter characters only in %s'
                     )
                 ),
                 array(
@@ -302,10 +282,11 @@ class SiteController extends CI_Controller
                     )
                 )
             );
-            $this->form_validation->set_error_delimiters('<span class="label label-warning">', '</span>');
+
             $this->form_validation->set_rules($config);
 
-            if ($this->form_validation->run() == true) {
+            if ($this->form_validation->run() == true)
+            {
                 $fname = null;
                 $lname = null;
                 $email = null;
@@ -334,26 +315,29 @@ class SiteController extends CI_Controller
                     if ($s == 1) {
                         $success = "Your request is received, Please wait for Admin approval";
                         $data['success'] = $success;
-                        $data['reset'] = true;
+                        $data['reset']=true;
                         $this->load->template('studreg', $data);
                     } else
                         echo "<script>alert('Data not Save');</script>";
                 }
-            } else {
+            }
+            else
+            {
                 $error = validation_errors();
             }
-            if (isset($error)) {
+            if(isset($error)) {
                 $data['error'] = $error;
-                $data['reset'] = false;
+                $data['reset']=false;
                 $this->load->template('studreg', $data);
             }
-        } else {
+        }
+        else
+        {
             $this->load->template('studreg');
         }
     }
 
-    public
-    function ireg()
+    public function ireg()
     {
         //this will get data from form
         //start here
@@ -366,13 +350,13 @@ class SiteController extends CI_Controller
                     'rules' => 'required|alpha',
                     'errors' => array(
                         'required' => 'You must provide a %s',
-                        'alpha' => 'Must enter characters only in %s'
+                        'alpha'=>'Must enter characters only in %s'
                     )
                 ),
                 array(
                     'field' => 'email',
                     'label' => 'Email Id',
-                    'rules' => 'required|valid_email|is_unique[login.username]',
+                    'rules' => 'required|valid_email|is_unique[school_master.email]',
                     'errors' => array(
                         'required' => 'You must provide a %s',
                         'valid_email' => '%s is not valid',
@@ -382,7 +366,7 @@ class SiteController extends CI_Controller
                 array(
                     'field' => 'pass',
                     'label' => 'Password',
-                    'rules' => 'required|callback_checkpass',
+                    'rules' => 'required',
                     'errors' => array(
                         'required' => 'You must provide a %s'
                     )
@@ -390,9 +374,8 @@ class SiteController extends CI_Controller
                 array(
                     'field' => 'cpass',
                     'label' => 'Confirm Passowrd',
-                    'rules' => 'required|matches[pass]',
+                    'rules' => 'matches[pass]',
                     'errors' => array(
-                        'required' => 'You must provide a %s',
                         'matches' => 'Password & %s is not match'
                     )
                 ),
@@ -402,7 +385,7 @@ class SiteController extends CI_Controller
                     'rules' => 'required|alpha',
                     'errors' => array(
                         'required' => 'You must provide a %s',
-                        'alpha' => 'Must enter characters only in %s'
+                        'alpha'=>'Must enter characters only in %s'
                     )
                 ),
                 array(
@@ -414,7 +397,7 @@ class SiteController extends CI_Controller
                     )
                 )
             );
-            $this->form_validation->set_error_delimiters('<span class="label label-warning">', '</span>');
+
             $this->form_validation->set_rules($config);
 
             if ($this->form_validation->run() == true) {
@@ -443,7 +426,7 @@ class SiteController extends CI_Controller
                     if ($s == 1) {
                         $success = "Your request is received, Please wait for Admin approval";
                         $data['success'] = $success;
-                        $data['reset'] = true;
+                        $data['reset']=true;
                         $this->load->template('intreg', $data);
                     } else
                         echo "<script>alert('Data not Save');</script>";
@@ -454,12 +437,12 @@ class SiteController extends CI_Controller
             }
             if (isset($error)) {
                 $data['error'] = $error;
-                $data['reset'] = false;
+                $data['reset']=false;
                 $this->load->template('intreg', $data);
             }
         } else {
-            $data['reset'] = false;
-            $this->load->template('intreg', $data);
+            $data['reset']=false;
+            $this->load->template('intreg',$data);
         }
     }
 }

@@ -2,7 +2,76 @@
 
 class Mcompany extends CI_Model
 {
-
+	public function save()
+	{
+		$nama = $_POST['name'];
+		$qry="insert into creg(name) VALUE ('".$nama."')";
+		$this->db->query($qry);
+		redirect('ccompany');
+	}
+	public function wlist($id)
+	{
+	$this->db->select('*');
+	$this->db->from('drive_participation');
+	$this->db->join('stud_master','drive_participation.stud_id =
+	stud_master.stud_id');
+	$this->db->where('c_id',$id);
+	$q1 = $this->db->get();
+	if($q1->num_rows()>0)
+        {
+			return $q1->result();
+			}
+	}
+	public function fullstud($drive_id)
+	{
+	$this->db->select('*');
+	$this->db->from('campus_drive');
+	$this->db->where('c_id',$drive_id);
+	$this->db->join('company_master', 'campus_drive.company_id =
+	company_master.company_id');
+	
+	$q1 = $this->db->get();
+	if($q1->num_rows()>0)
+    {
+			return $q1->row();	
+		}
+		else
+		{
+			echo "No Record Found";
+		}
+	}
+	public function drive()
+	{
+	$this->db->select('*');
+	$this->db->from('campus_drive');
+	$this->db->where('company_id',1);
+	$q1 = $this->db->get();
+	if($q1->num_rows()>0)
+        {
+			return $q1->result();
+		}
+		else
+		{
+			return "Not Any Drive Found";
+		}
+	}
+	public function fulldrive($drive_id)
+	{
+	$this->db->select('*');
+	$this->db->from('campus_drive');
+	$this->db->where('company_id',1);
+	//$this->db->join('company_master', 'campus_drive.company_id =1');
+	
+	$q1 = $this->db->get();
+	if($q1->num_rows()>0)
+    {
+			return $q1->row();	
+		}
+		else
+		{
+			echo "No Record Found";
+		}
+	}
 	public function getdata($email)
 	{
 		$q=$this->db->get_where('company_master',array('email'=>$email));

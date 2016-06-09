@@ -12,15 +12,11 @@
           type="image/png"
           href="<?= RES_URL; ?>img/rkulogo.png" />
 </head>
+
 <nav class="navbar navbar-default navbar-fixed-top" style="padding-bottom: 0px">
 <div class="container-fluid" style="padding-top:10px;padding-bottom:20px">
-        <div class="col-lg-4">
-            <script>
-                if(screen.width<1200)
-                    document.write("<a href='<?=base_url()?>sitecontroller'><img src='<?= RES_URL; ?>img/logo.png' width='50%'></a>");
-                else
-                    document.write("<a href='<?=base_url()?>sitecontroller'><img src='<?= RES_URL; ?>img/logo.png' width='100%'></a>");
-            </script>
+ <div class="col-lg-4">
+ <a href='../sitecontroller'><img src='<?= RES_URL; ?>img/logo.png' width='100%'></a>
         </div>
         <div class="col-lg-8">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -38,7 +34,7 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" style="padding-bottom:10px;background-color:#F8F8F8">
                 <ul class="nav navbar-nav navbar-right" style="align-content: center">
                     <li class="active">
-                        <a href="<?=base_url()?>sitecontroller" style="letter-spacing:2px">Home</a></li>
+                        <a href="../sitecontroller" style="letter-spacing:2px">Home</a></li>
                     <li class="active">
                         <a href="#" style="letter-spacing:2px">Job</a>
                     </li>
@@ -63,4 +59,5 @@
             </div>
         </div>
     </div>
+</div>
 </nav>

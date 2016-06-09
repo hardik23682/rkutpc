@@ -1,22 +1,30 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-
-class Ccompany extends CI_Controller
+class ccompany extends CI_Controller
 {
 	public $cid='';
 
 	public function __construct()
 	{
 		parent::__construct();
-		$this->load->model(array('mcompany'));
+		$this->load->model('mcompany');
 		$this->load->library('form_validation');
 		$this->load->library('session');
+		if (!$this->session->userdata('cid')) 
+		 {
+		 	redirect(base_url());
+		 } 
+			 
 	}
-
+	public function logout()
+    {
+        $this->session->unset_userdata('cid');
+        session_destroy();
+        redirect(base_url());
+    }
     public function index()
 	{
 		$cid=$this->session->userdata('cid');
 		$res=$this->mcompany->getdata($cid);
-
 		if(!empty($res['esyear']))
 			$this->home();
 		else
@@ -25,18 +33,18 @@ class Ccompany extends CI_Controller
 
 	public function home()
 	{
+		$data['records']=$this->mcompany->drive();
 		$this->load->view('company/header');
-		$this->load->view('company/dashboard');
+		$this->load->view('company/dashboard',$data);
 		$this->load->view('company/footer');
 	}
-
 	public function profile()
 	{
 		$cid=$this->session->userdata('cid');
 		$res=$this->mcompany->getdata($cid);
-
 		$submit = $this->input->post('submit');
-		if (isset($submit)) {
+		if (isset($submit))
+		 {
 			$config = array(
 				array(
 					'field' => 'name',
@@ -143,7 +151,7 @@ class Ccompany extends CI_Controller
 			$this->form_validation->set_error_delimiters('<span class="label label-danger">', '</span>');
 			$this->form_validation->set_rules($config);
 
-			$config['upload_path']          = './tpc_asset/company/prof';
+			$config['upload_path']          = './tpc_asset/company';
 			$config['allowed_types']        = 'gif|jpg|png';
 
 			$this->load->library('upload', $config);
@@ -214,7 +222,11 @@ class Ccompany extends CI_Controller
 			$this->load->view('company/footer');
 		}
 	}
-
+	public function process()
+	{
+		$this->load->view('company/header');
+		$this->load->view('company/process');
+	}
 	public function addDrive()
 	{
 		$submit = $this->input->post('submit');
@@ -464,6 +476,27 @@ class Ccompany extends CI_Controller
 			$this->load->view('company/adddriveform');
 			$this->load->view('company/footer');
 		}
-   	} 
+   	}
+	public function wlist($id)
+	{
+			$this->load->model('mcompany');
+			
+			$data['records']=$this->mcompany->wlist($id);
+			$this->load->view('company/wlistpg',$data);
+			
+	}
+	public function editprofile()
+	{
+		$this->load->view('company/header');
+		$this->load->view('company/vcdetailform');
+		$this->load->view('company/footer');
+	}	
+	public function drive($id)
+	{
+			$this->load->model('mcompany');
+			$data['records']=$this->mcompany->fullstud($id);
+			$this->load->view('company/studentinfo',$data);
+			
+	}
 }
 ?>
